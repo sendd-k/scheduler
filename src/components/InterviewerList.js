@@ -3,7 +3,7 @@ import InterviewerListItem from "./InterviewerListItem";
 
 import "components/InterviewerList.scss";
 
-export default function InterviwerList(props) {
+export default function InterviewerList(props) {
   return (
     <section className="interviewers">
   <h4 className="interviewers__header text--light">Interviewer</h4>
