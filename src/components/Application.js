@@ -66,6 +66,7 @@ export default function Application(props) {
     return axios.put(`/api/appointments/${id}`, appointment);
   }
 
+
   function cancelInterview(id, interview ) {
     console.log(id, interview);
     const appointment = {
