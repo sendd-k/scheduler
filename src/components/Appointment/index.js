@@ -40,7 +40,7 @@ export default function Appointment(props) {
       interviewer,
     };
     console.log("Appointment.interview", interview);
-    transition(DELETING,true);
+    transition(DELETING, true);
     props
       .cancelInterview(props.id, interview)
       .then(() => transition(EMPTY))
@@ -86,10 +86,16 @@ export default function Appointment(props) {
         />
       )}
       {mode === ERROR_SAVE && (
-        <Error message="Error while creating interview." onClose={() => back()} />
+        <Error
+          message="Error while creating interview."
+          onClose={() => back()}
+        />
       )}
       {mode === ERROR_DELETE && (
-        <Error message="Error while creating deleting." onClose={() => back()} />
+        <Error
+          message="Error while creating deleting."
+          onClose={() => back()}
+        />
       )}
     </article>
   );
