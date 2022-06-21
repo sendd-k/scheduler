@@ -61,9 +61,10 @@ export default function Application(props) {
       ...state.appointments,
       [id]: appointment,
     };
-    setState({ ...state, appointments });
     console.log("appointments", appointments)
-    return axios.put(`/api/appointments/${id}`, appointment);
+    return axios.put(`/api/appointments/${id}`, appointment).then(() => {
+      setState({ ...state, appointments });
+    });
   }
 
 
@@ -77,9 +78,10 @@ export default function Application(props) {
       ...state.appointments,
       [id]: appointment,
     };
-    setState({ ...state, appointments });
     console.log("delete appoint", appointments)
-    return axios.delete(`/api/appointments/${id}`, appointment);
+    return axios.delete(`/api/appointments/${id}`).then(() => {
+      setState({ ...state, appointments });
+    });
   }
 
   return (

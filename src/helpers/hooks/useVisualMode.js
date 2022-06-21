@@ -18,8 +18,3 @@ export default function useVisualMode(first) {
   return { mode, transition, back };
 }
 
-
-// else {
-//   setMode(second);
-//   setHistory((prev) => [...prev]);
-// }

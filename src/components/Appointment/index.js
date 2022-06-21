@@ -6,6 +6,7 @@ import Empty from "./Empty";
 import Form from "./Form";
 import Status from "./Status";
 import Confirm from "./Confirm";
+import Error from "./Error";
 import useVisualMode from "helpers/hooks/useVisualMode";
 
 import "./styles.scss";
@@ -17,6 +18,8 @@ const SAVING = "SAVING";
 const DELETING = "DELETING";
 const CONFIRM = "CONFIRM";
 const EDIT = "EDIT";
+const ERROR_SAVE = "ERROR_SAVE";
+const ERROR_DELETE = "ERROR_DELETE";
 
 export default function Appointment(props) {
   function save(name, interviewer) {
@@ -25,8 +28,11 @@ export default function Appointment(props) {
       interviewer,
     };
     console.log("Appointment.interview", interview);
-    transition(SAVING);
-    props.bookInterview(props.id, interview).then(() => transition(SHOW));
+    transition(SAVING, true);
+    props
+      .bookInterview(props.id, interview)
+      .then(() => transition(SHOW))
+      .catch(() => transition(ERROR_SAVE, true));
   }
   function deleteInterview(name, interviewer) {
     const interview = {
@@ -34,8 +40,11 @@ export default function Appointment(props) {
       interviewer,
     };
     console.log("Appointment.interview", interview);
-    transition(DELETING);
-    props.cancelInterview(props.id, interview).then(() => transition(EMPTY));
+    transition(DELETING,true);
+    props
+      .cancelInterview(props.id, interview)
+      .then(() => transition(EMPTY))
+      .catch(() => transition(ERROR_DELETE, true));
   }
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
@@ -75,6 +84,12 @@ export default function Appointment(props) {
           onCancel={back}
           onSave={save}
         />
+      )}
+      {mode === ERROR_SAVE && (
+        <Error message="Error while creating interview." onClose={() => back()} />
+      )}
+      {mode === ERROR_DELETE && (
+        <Error message="Error while creating deleting." onClose={() => back()} />
       )}
     </article>
   );
