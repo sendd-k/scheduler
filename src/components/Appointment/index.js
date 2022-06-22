@@ -1,5 +1,8 @@
+//Appointment Component
+
 import React from "react";
 
+//Imports For Seperate Components
 import Header from "./Header";
 import Show from "./Show";
 import Empty from "./Empty";
@@ -11,6 +14,7 @@ import useVisualMode from "helpers/hooks/useVisualMode";
 
 import "./styles.scss";
 
+//Modes
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
@@ -22,6 +26,7 @@ const ERROR_SAVE = "ERROR_SAVE";
 const ERROR_DELETE = "ERROR_DELETE";
 
 export default function Appointment(props) {
+  //Saves Interview
   function save(name, interviewer) {
     const interview = {
       student: name,
@@ -34,18 +39,19 @@ export default function Appointment(props) {
       .then(() => transition(SHOW))
       .catch(() => transition(ERROR_SAVE, true));
   }
+  //Deletes Interview
   function deleteInterview(name, interviewer) {
     const interview = {
       student: name,
       interviewer,
     };
-    console.log("Appointment.interview", interview);
     transition(DELETING, true);
     props
       .cancelInterview(props.id, interview)
       .then(() => transition(EMPTY))
       .catch(() => transition(ERROR_DELETE, true));
   }
+  //Transitions Between Modes
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );

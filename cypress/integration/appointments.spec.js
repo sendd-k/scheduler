@@ -1,4 +1,4 @@
-const { CYCLIC_KEY } = require("@storybook/addon-actions/dist/constants");
+//Cypress Tests
 
 describe("appointments", () => {
   beforeEach(() => {

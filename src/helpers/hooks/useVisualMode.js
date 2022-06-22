@@ -1,3 +1,5 @@
+//useVisualMode Hooks. Helps Transitions
+
 import { useState } from "react";
 
 export default function useVisualMode(first) {

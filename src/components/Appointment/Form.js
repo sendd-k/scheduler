@@ -1,3 +1,5 @@
+//Form Component
+
 import React, { useState } from "react";
 
 import Button from "components/Button";
@@ -8,32 +10,31 @@ export default function Form(props) {
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
   const [error, setError] = useState("");
 
+  //Validates Blank Student/Interviewer
   function validate() {
     if (student === "") {
       setError("Student name cannot be blank");
       return;
     }
-
     if (interviewer === null) {
       setError("Please select an interviewer");
       return;
     }
-
     setError("");
     props.onSave(student, interviewer);
   }
+
+  //Resets Component
   const reset = () => {
     setStudent("");
     setInterviewer("null");
   };
+
+  //Cancel Component
   const cancel = () => {
     reset();
     props.onCancel();
   };
-
-  // const save = () => {
-  //   props.onSave(student, interviewer);
-  // };
 
   return (
     <main className="appointment__card appointment__card--create">

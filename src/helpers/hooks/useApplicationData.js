@@ -1,3 +1,5 @@
+//useApplicationData. Controls State
+
 import { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -11,6 +13,7 @@ export default function useApplicationData(props) {
     appointments: {},
   });
 
+  //Get Requests For API
   useEffect(() => {
     Promise.all([
       axios.get("http://localhost:8001/api/days"),
@@ -27,6 +30,7 @@ export default function useApplicationData(props) {
   }, []);
   console.log(state.interviewers);
 
+  //Update Spots For Sidebar
   const updateSpots = function (state, appointments) {
     const dayObj = state.days.find((d) => d.name === state.day);
     let spots = 0;
@@ -41,6 +45,7 @@ export default function useApplicationData(props) {
     return days;
   };
 
+  //Function For Booking An Interview
   function bookInterview(id, interview) {
     console.log(id, interview);
     const appointment = {
@@ -51,13 +56,15 @@ export default function useApplicationData(props) {
       ...state.appointments,
       [id]: appointment,
     };
-    //console.log("appointments", appointments);
+
+    //Put Request For Insterting Interview Into API
     return axios.put(`/api/appointments/${id}`, appointment).then(() => {
       const days = updateSpots(state, appointments);
       setState({ ...state, appointments, days });
     });
   }
 
+  //Function For Cancelling Interview
   function cancelInterview(id, interview) {
     console.log(id, interview);
     const appointment = {
@@ -68,8 +75,8 @@ export default function useApplicationData(props) {
       ...state.appointments,
       [id]: appointment,
     };
-    //console.log("delete appoint", appointments);
 
+    //Delete Request For API
     return axios.delete(`/api/appointments/${id}`).then(() => {
       const days = updateSpots(state, appointments);
       setState({ ...state, appointments, days });

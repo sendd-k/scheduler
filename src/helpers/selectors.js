@@ -1,3 +1,5 @@
+//Selector Helpers
+
 export function getAppointmentsForDay(state, day) {
   const result = [];
   for (const i of state.days) {
@@ -25,7 +27,6 @@ export function getInterviewersForDay(state, day) {
   }
   return result;
 }
-
 
 export function getInterview(state, interview) {
   if (interview) {

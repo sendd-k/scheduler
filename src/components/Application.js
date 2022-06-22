@@ -1,5 +1,8 @@
+//Application Component
+
 import React from "react";
 
+//Imports For Components
 import "components/Application.scss";
 import DayList from "./DayList";
 import useApplicationData from "helpers/hooks/useApplicationData";
@@ -19,6 +22,7 @@ export default function Application(props) {
   const schedule = dailyAppointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
 
+    //Appointment Information
     return (
       <Appointment
         key={appointment.id}
@@ -32,6 +36,7 @@ export default function Application(props) {
     );
   });
 
+  //Main Application HTML
   return (
     <main className="layout">
       <section className="sidebar">
