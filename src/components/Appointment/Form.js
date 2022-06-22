@@ -14,10 +14,11 @@ export default function Form(props) {
       return;
     }
 
-    if (interviewer === null) {
-      setError("Please select an interviewer");
-      return;
-    }
+    // if (interviewer === null) {
+    //   setError("Please select an interviewer");
+    //   return;
+    // }
+
     setError("");
     props.onSave(student, interviewer);
   }
@@ -59,7 +60,7 @@ export default function Form(props) {
         <InterviewerList
           interviewers={props.interviewers}
           value={interviewer}
-          onChange={(event) => setInterviewer(event)}
+          onChange={setInterviewer}
         />
       </section>
       <section className="appointment__card-right">
