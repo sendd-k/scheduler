@@ -28,7 +28,6 @@ export default function useApplicationData(props) {
       }));
     });
   }, []);
-  console.log(state.interviewers);
 
   //Update Spots For Sidebar
   const updateSpots = function (state, appointments) {
@@ -47,7 +46,6 @@ export default function useApplicationData(props) {
 
   //Function For Booking An Interview
   function bookInterview(id, interview) {
-    console.log(id, interview);
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview },
@@ -66,7 +64,6 @@ export default function useApplicationData(props) {
 
   //Function For Cancelling Interview
   function cancelInterview(id, interview) {
-    console.log(id, interview);
     const appointment = {
       ...state.appointments[id],
       interview: null,
